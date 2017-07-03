@@ -1,0 +1,131 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+	<title>Yuurirangin Syarikdis</title>
+	<style>
+	  p {
+	    font-size:16;
+		font-family:"Times New Roman"
+	  }
+	  .syarik{
+	    font-size:26;
+	  }
+	  .syuntas{
+	    font-size:26;
+		font-family:"Times New Roman";
+		
+	  }
+	  .syarikingadis{
+	    font-size:26;
+		font-family:"Times New Roman";
+		background-color:green;
+	  }
+	</style>
+	
+	<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+	  
+	  var acchedis=0; //開始フラグ
+	  var jimka; //タイマー
+	  var srk; //入力ボックス
+	  var srkg;
+	  var ainftm; //リスタートボタン
+	  var syuntastue; //問題文
+	  var phantas; //単語
+	  var acchejimka; //開始時刻
+	  var naajimka; //現在時刻
+	  
+	  function septor(){
+	    syuntastue=new Array();
+		
+		syuntastue[0]="Aam naa fo Yuugokkun rangonem he wangin en Moono kka Akaano je. Dii nemmehon matin honemor fo Akasrarkas. Akasrarkas Yuugokku he zyuunin en Akasrarkas matin diin mantuen bidenrang syaazi dekan neree asrar naathimkan Naara.";
+		syuntastue[1]="Matin akkan archetue, am tekyader reknasyaita en akkan paabwa baro, am dekehotei karam he ti ruudonteinna en fiithedis fo moggiodis, aam geraakpo fo dim je? Fo ar ehoyotue h'aam ehoteinna di am, am je geraakpo. Am korexna dim gin naa. Baro, chemngan h'ankyanpa tegge karam derkbastagan. Mo, syaazi moo h'am wana eho en tenna, ggader. Am syerii aam. Aam bi am syafiurgan? He dim gan phas aamn dadewonehorin nacchedis mo je deen. Karam, am nastaandis wirseyo t'aam je dertur. Am an ehohhe amn Rain! Getogan kito he zuimur itrahhen. Kamsam gin naa.";
+		syuntastue[2]="La shej ek na tup. Kja koj nat na djek. Ding leat juo dang sup. Fjak ao tek en kjek. Keot sap lom Lao Chej. Shung net sem lan taj. Wi djat swok gjat kej. Mo bje keo ak aj!";
+	  }
+	  
+	  //ゲーム初期化
+	  function initialize(){
+	    septor(); //問題データ設定
+		srk=document.getElementById("syarik");
+		ainftm=document.getElementById("ain");
+		srkg=document.getElementById("syarikingadis");
+		
+		acche();
+	  };
+	  
+	  //スタート
+	  function acche(){
+	    var wisokaSuu=Math.floor(Math.random()*3);
+	    phantas=syuntastue[wisokaSuu].split(" ");
+		document.getElementById("acharimsyuntas").innerHTML="";
+		document.getElementById("acharimsyuntas").innerHTML=syuntastue[wisokaSuu];
+		acchedis=1;
+		ph=0;
+		for(var i=0;i<phantas.length;i++){
+		  phantas[i]+=" ";
+		}
+		document.getElementById("choiru").innerHTML="";
+		console.log(phantas);
+		
+		acchejimka=(new Date).getTime();
+		acharimMepidir();
+	  }
+	  
+	  var ph; //文中の単語のカウント
+	  
+	  //メインループ
+	  function acharimMepidir(){
+	    if(acchedis==1){
+  		  if(srk.value!=""){
+	  	    var s=srk.value;
+		    var i=0;
+		    for(i=0;phantas[ph].slice(i,i+1)==s.slice(i,i+1) && i<phantas[ph].length;i++);
+		    if(i==phantas[ph].length){
+			  console.log(phantas[ph]);
+			  srk.value="";
+			  srkg.innerHTML= srkg.innerHTML + phantas[ph];
+			  document.getElementById("acharimsyuntas").innerHTML=
+			    document.getElementById("acharimsyuntas").innerHTML.slice(phantas[ph].length,document.getElementById("acharimsyuntas").innerHTML.length);
+			  ph++;
+			}
+		  }
+		  if(ph==phantas.length){
+		    nacche();
+			
+		  }
+		  
+		  naajimka=(new Date).getTime();
+		}
+		
+		
+		jimka=setTimeout(function (){acharimMepidir();},66);
+	  }
+	  
+	  function nacche(){
+	    document.getElementById("choiru").innerHTML="Yanbanna!"
+		clearTimeout(jimka);
+		acchedis=0;
+		document.getElementById("choiru").innerHTML="Aamn choiru je "+ reikesKutuu(acchejimka,naajimka,ph) +" wpm";
+	  }
+	  
+	  // reiksKutuu 開始時間,終了時間,単語数
+	  function reikesKutuu(ach,naa, pht){
+	    var ttc=Math.floor((naa-ach)/1000);
+		console.log(ttc);
+		console.log(pht);
+		return Math.floor(pht*60/ttc);
+	  }
+	  
+	</script>
+	
+  </head>
+  <body onload="initialize();">
+    <h2>Yuugokkun Syarikdis</h2>
+	<p>Syarik sukon syuntasree bu en syarikmoyo. Bi syarikdis dim acche.</p>
+	
+	<span class="syarikingadis" id="syarikingadis"></span><span class="syuntas" id="acharimsyuntas">Fistir</span><br>
+	<input class="syarik" id="syarik"><input type="button" id="ain" value="Ainacche" onclick="acche();"><br>
+	<span></span><br>
+	<p id="choiru"></p>
+  </body>
+</html>
