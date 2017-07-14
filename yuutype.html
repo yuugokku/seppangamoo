@@ -22,7 +22,6 @@
 	  }
 	</style>
 	
-	<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
 	  
 	  var acchedis=0; //開始フラグ
@@ -36,11 +35,9 @@
 	  var naajimka; //現在時刻
 	  
 	  function septor(){
-	    syuntastue=new Array();
-		
-		syuntastue[0]="Aam naa fo Yuugokkun rangonem he wangin en Moono kka Akaano je. Dii nemmehon matin honemor fo Akasrarkas. Akasrarkas Yuugokku he zyuunin en Akasrarkas matin diin mantuen bidenrang syaazi dekan neree asrar naathimkan Naara.";
-		syuntastue[1]="Matin akkan archetue, am tekyader reknasyaita en akkan paabwa baro, am dekehotei karam he ti ruudonteinna en fiithedis fo moggiodis, aam geraakpo fo dim je? Fo ar ehoyotue h'aam ehoteinna di am, am je geraakpo. Am korexna dim gin naa. Baro, chemngan h'ankyanpa tegge karam derkbastagan. Mo, syaazi moo h'am wana eho en tenna, ggader. Am syerii aam. Aam bi am syafiurgan? He dim gan phas aamn dadewonehorin nacchedis mo je deen. Karam, am nastaandis wirseyo t'aam je dertur. Am an ehohhe amn Rain! Getogan kito he zuimur itrahhen. Kamsam gin naa.";
-		syuntastue[2]="La shej ek na tup. Kja koj nat na djek. Ding leat juo dang sup. Fjak ao tek en kjek. Keot sap lom Lao Chej. Shung net sem lan taj. Wi djat swok gjat kej. Mo bje keo ak aj!";
+	    syuntastue=["Aam naa fo Yuugokkun rangonem he wangin en Moono kka Akaano je. Dii nemmehon matin honemor fo Akasrarkas. Akasrarkas Yuugokku he zyuunin en Akasrarkas matin diin mantuen bidenrang syaazi dekan neree asrar naathimkan Naara.",
+		"Matin akkan archetue, am tekyader reknasyaita en akkan paabwa baro, am dekehotei karam he ti ruudonteinna en fiithedis fo moggiodis, aam geraakpo fo dim je? Fo ar ehoyotue h'aam ehoteinna di am, am je geraakpo. Am korexna dim gin naa. Baro, chemngan h'ankyanpa tegge karam derkbastagan. Mo, syaazi moo h'am wana eho en tenna, ggader. Am syerii aam. Aam bi am syafiurgan? He dim gan phas aamn dadewonehorin nacchedis mo je deen. Karam, am nastaandis wirseyo t'aam je dertur. Am an ehohhe amn Rain! Getogan kito he zuimur itrahhen. Kamsam gin naa.",
+		"La shej ek na tup. Kja koj nat na djek. Ding leat juo dang sup. Fjak ao tek en kjek. Keot sap lom Lao Chej. Shung net sem lan taj. Wi djat swok gjat kej. Mo bje keo ak aj!"];
 	  }
 	  
 	  //ゲーム初期化
@@ -65,7 +62,7 @@
 		  phantas[i]+=" ";
 		}
 		document.getElementById("choiru").innerHTML="";
-		console.log(phantas);
+		//console.log(phantas);
 		
 		acchejimka=(new Date).getTime();
 		acharimMepidir();
@@ -83,7 +80,7 @@
 		    if(i==phantas[ph].length){
 			  console.log(phantas[ph]);
 			  srk.value="";
-			  srkg.innerHTML= srkg.innerHTML + phantas[ph];
+			  srkg.innerHTML += phantas[ph];
 			  document.getElementById("acharimsyuntas").innerHTML=
 			    document.getElementById("acharimsyuntas").innerHTML.slice(phantas[ph].length,document.getElementById("acharimsyuntas").innerHTML.length);
 			  ph++;
